@@ -1,0 +1,55 @@
+@import '../../../styles/abstracts/variables.scss';
+
+.Button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font: inherit;
+    padding: 1rem;
+    margin: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    border-radius: 2px;
+    text-align: center;
+    &:hover {
+    	box-shadow: 0 1rem 2rem rgba($color-black, 0.15);
+		transform:translateY(-2px);
+    }
+    &:active {
+    	box-shadow: 0 0.5rem 1rem rgba($color-black, 0.15);
+		transform:translateY(0);
+    }
+}
+
+// .Button:first-of-type {
+//     margin-left: 0;
+//     padding-left: 0.2rem;
+// }
+
+.Button {
+    // margin-left: 0;
+    // padding-left: 0.2rem;
+}
+
+.Button:disabled {
+    color: gray;
+    cursor: not-allowed;
+}
+
+.Success {
+	color: $color-primary-dark;
+    &:hover {
+    	background-color: $color-primary-dark;
+    	color: white;
+    }
+}
+
+.Danger {
+    color: $color-secondary-dark;
+    &:hover {
+    	background-color: $color-secondary-dark;
+    	color:white;
+    }
+}

@@ -1,0 +1,18 @@
+.Price {
+	border-bottom:solid 1px black;
+	color: red;
+	display: inline-block;
+}
+
+.List {
+	// list-style:none;
+	border-top: dashed 1px grey;
+	border-bottom: dashed 1px grey;
+	// margin: 3rem 0;
+	padding: 1.5rem 0;
+	background-color: lightgreen;
+
+	& .List_items {
+		margin-left: 3rem;
+	}
+}

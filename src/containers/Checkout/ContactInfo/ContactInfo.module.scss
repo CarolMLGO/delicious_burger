@@ -1,0 +1,35 @@
+.ContactInfo {
+	margin: 2rem auto;
+	width: 80%;
+	text-align: center;
+	box-shadow: 0 2px 3px #ccc;
+	border: 1px solid #eee;
+	padding: 1rem;
+	border-box: border-box;
+
+	& .Form {
+		// display: grid;
+		// grid-template-rows: repeat(4,1fr);
+		// // grid-template-columns: repeat(2,minmax(10rem,max-content));
+		// grid-gap: 2rem 3rem;
+		// justify-content: center;
+
+		// & input {
+		// 	// height:3rem;
+		// 	// margin-bottom: 1rem;
+		// 	// width: 80%;
+		// }
+	}
+}
+
+@media (min-width: 60rem) {
+	.ContactInfo {
+		width: 60%;
+
+		// & .Form {
+		// 	grid-template-rows: repeat(2,minmax(3rem,max-content));
+		// 	grid-template-columns: repeat(2,minmax(10rem,max-content));
+		// }
+	}
+}
+
