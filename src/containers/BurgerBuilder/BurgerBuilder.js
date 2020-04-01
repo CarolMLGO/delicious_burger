@@ -1,18 +1,17 @@
 import React, {Component} from 'react';
-// import Aux from '../../hoc/Auxilliary';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
 import styles from './BurgerBuilder.module.scss';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import Spinner from '../../components/Spinner/Spinner';
-import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
-import axios from '../../axios-order'; //import axios instance
 
 import {connect} from 'react-redux';
 import * as actionCreators from '../store/actions/actionCreators';
+import {withRouter} from 'react-router-dom';
 
 class BurgerBuilder extends Component {
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -24,56 +23,22 @@ class BurgerBuilder extends Component {
 		}
 	};
 
-	// componentDidMount () {
-	// 	axios.get('/ingredients.json')
-	// 	.then(res=> this.setState({ingredients: res.data}))
-	// 	.catch(err=>this.setState({ingredientLoadingError:true}))
-	// }// handle async redux later, comment out for the time being
 	componentDidMount () {
 		this.props.onFetchIg();
 	}
 
-	// orderHandler = (ingredients) => {
-	// 	const orderSum = Object.values(ingredients).reduce ((acc,cur)=>{
-	// 	return acc+=cur},0); // loop through the values of the object
-	// 	this.setState({order: orderSum > 0});//much simpler code
-	// };
-
-	// igChangeHandler = (event,type) => {
-	// 	const updateIngredients = {...this.props.ingredients};// create a new object instead of mutate the old object
-	// 	const oldCount = updateIngredients[type];//old count
-
-	// 	const oldPrice = this.state.totalPrice; //get the old price
-	// 	const priceAddition = ig_Price[type]; // fetch the price for ingredients
-	// 	//if clicked the "more" button
-	// 	if (event.target.textContent === 'More') {
-	// 		updateIngredients[type] = oldCount +1 ; // update counts
-	// 		let updatePrice = oldPrice + priceAddition; // update price
-	// 		this.setState ((prevState,props)=>{
-	// 	      return {
-	// 	        ingredients: updateIngredients,
-	// 	        totalPrice: updatePrice
-	// 	      }
-	// 	    })
-	// 	} 
-	// 	// if click the "less" button
-	// 	else if (event.target.textContent === 'Less') {
-	// 		//if old count is 0
-	// 		if (oldCount <= 0) {
-	// 			return;
-	// 		} 
-	// 		updateIngredients[type] = oldCount - 1;
-	// 		let updatePrice = oldPrice - priceAddition; // update price
-	// 		this.setState({
-	// 			ingredients: updateIngredients,
-	// 			totalPrice: updatePrice
-	// 		})			
-	// 	}
-	// 	this.orderHandler(updateIngredients,axios);//call order handler function to update order state	
-	// };
-
+	
 	orderSummaryHandler = () => {
-    	this.setState ({showOrderSummary: true});
+    	if (this.props.isAuthenticated) 
+    		{
+    			this.setState ({showOrderSummary: true})
+    	}
+    	else {
+    			//if not authenticated, redirect to authenticate page
+    			this.props.history.push('/auth')
+    	}
+
+
 	};
 
 	orderCancelHandler = () => {
@@ -100,7 +65,7 @@ class BurgerBuilder extends Component {
 			disabledInfo[key] = disabledInfo[key]<=0;
 		};
 		
-		let ingredientError = this.props.igLoadingError ? <p> Error loading ingredients </p> : <Spinner />;
+		let ingredientError = this.props.igLoadingError ? <p style={{"textAlign":"center"}}> Error loading ingredients </p> : <Spinner />;
 
 		return (
 			<div className={styles.BurgerBuilder}>
@@ -118,6 +83,7 @@ class BurgerBuilder extends Component {
 							price = {this.props.totalPrice}
 							order = {this.props.purchasable}
 							clicked = {this.orderSummaryHandler}
+							isAuth = {this.props.isAuthenticated}
 						/>
 						<Modal show = {this.state.showOrderSummary} loading={this.state.loading} modalClosed = {this.orderCancelHandler} >
 							<OrderSummary 
@@ -139,7 +105,8 @@ const mapStateToProps = (state) => {
 		ingredients: state.ing.ingredients,
 		totalPrice: state.ing.totalPrice,
 		purchasable: state.ing.purchasable,
-		igLoadingError: state.ing.igLoadingError //show spinner or not, fetching ingredients from firebase
+		igLoadingError: state.ing.igLoadingError, //show spinner or not, fetching ingredients from firebase
+		isAuthenticated: state.auth.idToken
 	}
 };
 
@@ -152,4 +119,4 @@ const mapDispatchToProps = (dispatch) => {
 	}
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(withErrorHandler(BurgerBuilder,axios));
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(BurgerBuilder));

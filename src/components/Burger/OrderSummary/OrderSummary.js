@@ -1,16 +1,8 @@
 import React, {Component} from 'react';
-import Aux from '../../../hoc/Auxilliary';
 import Button from '../../../components/UI/Button/Button';
 import styles from './OrderSummary.module.scss';
 
 class  OrderSummary extends Component {
-	componentDidUpdate () {
-		console.log('[OrderSummary] rendered')
-	}
-
-	// shouldComponentUpdate(nextProps,nextState) {
-	// 	if(nextProps.)
-	// }
 
 	render() {
 		const ingredientSummary = this.props.ingredients;
@@ -19,7 +11,7 @@ class  OrderSummary extends Component {
 		})
 
 		return (
-			<Aux>
+			<div className={styles.OrderSummary}>
 				<h3> Your order </h3>
 				<p> A delicious burger with the following ingredients: </p>
 				<ul className={styles.List}>
@@ -27,9 +19,11 @@ class  OrderSummary extends Component {
 				</ul>
 				<p className={styles.Price}> <strong>Total price: </strong> {this.props.price.toFixed(2)} $</p>
 				<p> Continue to Checkout? </p>
-				<Button btnType = "Danger" clicked = {this.props.orderCanceled} > Cancel </Button>
-				<Button btnType = "Success" clicked = {this.props.orderContinued} > Continue </Button>
-			</Aux>
+				<div className={styles.button}>
+					<Button btnType = "Danger" clicked = {this.props.orderCanceled} > Cancel </Button>
+					<Button btnType = "Success" clicked = {this.props.orderContinued} > Continue </Button>
+				</div>
+			</div>
 		)
 	}
 };

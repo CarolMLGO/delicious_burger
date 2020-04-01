@@ -7,8 +7,8 @@ const order = (props) => {
 	// // 	ingredients.push({name: ingredientName, amount: props.ingredients[ingredientName]})
 	// // }
 	Object.entries(props.ingredients).map(cur=> ingredients.push({name:cur[0],amount:Number(cur[1])}));
-	const ingredientOutput = ingredients.map (cur => {
-		return <span style={{textTransform:'capitalize',display:'inline-block', margin:'0 8px',border:'1px solid #ccc',padding:'5px'}}> {cur.name} ({cur.amount}) </span>
+	const ingredientOutput = ingredients.map ((cur,index) => {
+		return <span key={index} style={{textTransform:'capitalize',display:'inline-block', margin:'0 8px',border:'1px solid #ccc',padding:'5px'}}> {cur.name} ({cur.amount}) </span>
 	})
 
 	return (

@@ -9,19 +9,20 @@ const withErrorHandler = (WrappedComponent,axios) => {
 		}
 
 		componentWillMount() {
-			this.reqInterceptor= axios.interceptors.request.use(req=>{
+			this.reqInterceptor= axios.interceptors.request.use(req => {
+				// Edit the request (common use case is to add header information)
 				this.setState({error:null})
-				return req
+				return req; //always return the request in the end, otherwise it will block the request
 			});
 
-			this.resInterceptor= axios.interceptors.response.use(res=> res,error=> {
+			this.resInterceptor= axios.interceptors.response.use(res=> res, error => {
 				this.setState({error: error})
 			})
 		}
 
 		componentWillUnmount() {
 			axios.interceptors.request.eject(this.reqInterceptor);
-			axios.interceptors.request.eject(this.resInterceptor); //prevent memory leaks
+			axios.interceptors.request.eject(this.resInterceptor); //remove interceptor when component unmounted, prevent memory leaks
 		}
 
 		errorConfirmedHandler = () => {

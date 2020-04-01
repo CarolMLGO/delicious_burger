@@ -8,36 +8,9 @@ import {connect} from 'react-redux';
 import * as actionCreators from '../store/actions/actionCreators';
 
 class Orders extends Component {
-	// state = {
-	// 	orders: [],
-	// 	loading: true
-	// };
-
-	// componentWillMount () {
-	// 	axios.get('/orders.json')
-	// 	.then(res=> {
-	// 		const fetchedOrders = [];
-	// 		for (let key in res.data) {
-	// 			fetchedOrders.push({
-	// 				...res.data[key],
-	// 				id:key
-	// 			});
-	// 		}
-	// 		this.setState({
-	// 		orders: fetchedOrders,
-	// 		loading: false
-	// 	})})
-	// 	.catch( err => {
-	// 		this.setState({loading: false});
-	// 	})
-	// };
-	//process javascript object from firebase
-	// componentDidMount () {
-	// 	this.state.dataInfo.map(cur=> {console.log('ingredients',cur.ingredients); console.log('price',cur.price)})
-	// }
 
 	componentWillMount(){
-		this.props.onFetchOrder()
+		this.props.onFetchOrder(this.props.token,this.props.userId) //get the token from store, pass it to onFetchOrder action
 	};
 
 	render () {
@@ -58,13 +31,15 @@ class Orders extends Component {
 const mapStateToProps = (state) => {
 	return {
 		orders: state.order.ordersFetched,
-		fetchLoading: state.order.fetchLoading
+		fetchLoading: state.order.fetchLoading,
+		token: state.auth.idToken,
+		userId: state.auth.userId
 	}
 };
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		onFetchOrder: () => dispatch(actionCreators.fetchOrder())
+		onFetchOrder: (token,userId) => dispatch(actionCreators.fetchOrder(token,userId))
 	}
 };
 

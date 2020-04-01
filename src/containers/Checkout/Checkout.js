@@ -1,37 +1,14 @@
 import React, { Component } from 'react';
-import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
 import { Route,Redirect } from 'react-router-dom';
-import ContactInfo from './ContactInfo/ContactInfo';
-
 import { connect } from 'react-redux';
-// import * as actionCreators from '../store/actions/actionCreators';
+// import {withRouter} from'react-router-dom';
+//import components
+import ContactInfo from './ContactInfo/ContactInfo';
+import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
+// const CheckoutSummary = React.lazy(() => import('../../components/Order/CheckoutSummary/CheckoutSummary'));
+// const ContactInfo = React.lazy(() => import('./ContactInfo/ContactInfo'));
 
 class Checkout extends Component {
-
-	//by using redux, we do not need state and componentDidMount
-	// state = {
-	// 	ingredients: {},
-	// 	price:0
-	// }
-
-	// componentDidMount() {
-	// 	const query = new URLSearchParams(this.props.location.search);
-	// 	const ing = {};
-	// 	let price = 0;
-	// 	for (let params of query) {
-	// 		if (params[0] === 'price') {
-	// 			price = params[1];
-	// 		} else {
-	// 			ing[params[0]]=Number(params[1])
-	// 		}
-			
-	// 	}
-	// 	this.setState({ingredients:ing, totalPrice: price})
-	// }
-	
-	// componentWillMount() {
-	// 	this.props.onPurchaseInit();
-	// } // we do not want to initilize purchased state here. 
 
 	checkoutCancelledHandler = () => {
 		this.props.history.goBack();
@@ -60,22 +37,12 @@ class Checkout extends Component {
 	}
 };
 
-				// <Route path={this.props.match.path + '/contact-data'} render={(props) => (<ContactInfo ingredients={this.props.ingredients} price = {this.props.totalPrice} {...props} />)} /> // we do not need to use this trick to access the data, using redux help get rid of this
 
 const mapStateToProps = (state) => {
 	return {
 		ingredients: state.ing.ingredients,
-		// totalPrice: state.ing.totalPrice,
 		purchased: state.order.purchased
 	}
 }
 
-// const mapDispatchToProps = (dispatch) => {
-// 	return {
-// 		onPurchaseInit: () => dispatch(actionCreators.purchaseInit())
-// 	}
-// }
-
 export default connect(mapStateToProps)(Checkout);
-
-// <Route path={this.props.match.path + '/contact-data'} component={ContactInfo} />

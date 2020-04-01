@@ -1,3 +1,7 @@
+.OrderSummary h3 {
+	text-align:center;
+}
+
 .Price {
 	border-bottom:solid 1px black;
 	color: red;
@@ -5,14 +9,16 @@
 }
 
 .List {
-	// list-style:none;
 	border-top: dashed 1px grey;
 	border-bottom: dashed 1px grey;
-	// margin: 3rem 0;
 	padding: 1.5rem 0;
 	background-color: lightgreen;
 
 	& .List_items {
 		margin-left: 3rem;
 	}
+}
+
+.button {
+	text-align:center;
 }

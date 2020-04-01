@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import {Link, withRouter} from 'react-router-dom';
+import React, { Component,Fragment } from 'react';
 import { Formik, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import styles from './Auth.module.scss';
-import Spinner from '../../components/Spinner/Spinner';
-
 import * as actionCreators from '../store/actions/actionCreators';
 import { connect } from "react-redux";
+
+import Spinner from '../../components/Spinner/Spinner';
+import Button from '../../components/UI/Button/Button';
 
 class Auth extends Component {
     state={
@@ -14,13 +14,24 @@ class Auth extends Component {
     };
 
     onSubmitHandler = (values,isSignUp) => {
-        this.props.onAuth(values.email, values.password, isSignUp)
+        this.props.onAuth(values.email, values.password, isSignUp);
     }
 
     switchAuthHandler = () => {
         this.setState(preState=>{
             return {isSignUp: !preState.isSignUp};
         })
+    }
+
+    componentDidUpdate() {
+        //if user is authenticated, but not add ingredients, will redirect to burger builder page
+        if(this.props.token && (!this.props.purchasable)) {
+            this.props.history.replace('/')
+        } 
+        //if user is authenticated and add ingredients to a burger, will redirect to check out page after log in
+        else if (this.props.token && this.props.purchasable) {
+            this.props.history.replace('/checkout')
+        }
     }
       
     render() {
@@ -33,17 +44,16 @@ class Auth extends Component {
                         .min(8, 'Password is too short - should be 8 chars minimum.up')
                 });
         return(
-            <div>
-
-            {this.props.loading ?
-            <Spinner />
+            <Fragment>
+            {this.props.loading 
+            ?<Spinner />
             :
             <Formik 
             initialValues = {{email:'',password:''}}
             validationSchema= {validation_Yup}>
             {
                 (props) => {
-                    const {values} = props;
+                    const {values,isValid} = props;
                     return(
                         <div className={styles.Auth}>
                             <h1> {this.state.isSignUp? 'Sign Up':'Sign In' } </h1>
@@ -56,35 +66,36 @@ class Auth extends Component {
                             <ErrorMessage name="password">
                                 {msg=><div className={styles.error}>{msg}</div>}
                             </ErrorMessage>
-                            <input type="submit" name="auth_submit" className={styles.Auth_submit} value={'Submit'} onClick={()=>this.onSubmitHandler(values,this.state.isSignUp)}/> 
+                            <Button btnType = 'Success' disabled={!isValid} clicked={()=>this.onSubmitHandler(values,this.state.isSignUp)}> SUBMIT </Button>
                             <div className={styles.Auth_switch} onClick={this.switchAuthHandler}> 
-                                Switch to {this.state.isSignUp? 'Sign In':'Sign Up'}
+                                 {this.state.isSignUp? 'Already have an account? Switch to Sign In':'No account? Switch to Sign Up'}
                             </div>
-                            {/*<div className={styles.Signup_Register}>
-                                <span> Already have an account? </span><br/>
-                                        <Link to="/signin"> Sign In</Link>
-                            </div>*/}
                         </div>)
                 }
             }
             </Formik>
             }
-            </div>
+            </Fragment>
         );
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        loading: state.auth.loading,
-        error: state.auth.error
+        loading: state.auth.loading,//before we got a response from the server
+        error: state.auth.error, //display authenticaiton error message
+        token: state.auth.idToken,
+        purchasable: state.ing.purchasable //to see if the user already built a burger or not
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        //send requests to server
         onAuth: (email,password,isSignUp) => dispatch(actionCreators.auth(email,password,isSignUp))
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(withRouter(Auth));
+export default connect(mapStateToProps,mapDispatchToProps)(Auth);
+
+// <input type="submit" name="auth_submit" className={styles.Auth_submit} value={'Submit'} onClick={()=>this.onSubmitHandler(values,this.state.isSignUp)}/> 

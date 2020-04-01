@@ -1,5 +1,4 @@
-import React, {Component} from 'react';
-import Aux from '../../hoc/Auxilliary';
+import React, {Component,Fragment} from 'react';
 import styles from './Layout.module.scss';
 import Toolbar from '../Navigation/Toolbar/Toolbar';
 import SideDrawer from '../Navigation/SideDrawer/SideDrawer';
@@ -23,15 +22,14 @@ class Layout extends Component {
 	}
 
 	render() {
-	
 		return (
-			<Aux>
+			<Fragment>
 				<Toolbar toggled={this.toggleButtonHandler}/>
 				<SideDrawer open={this.state.showSideDrawer} closed={this.sideDrawerClosedHandler}/>
 				<main className = {styles.Content} > 
 					{this.props.children}
 				</main>
-			</Aux>
+			</Fragment>
 		)
 }
 }
