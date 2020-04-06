@@ -1,5 +1,12 @@
+@import '../../../styles/abstracts/mixins';
+
 .CheckoutSummary {
 	text-align: center;
 	width: 80%;
 	margin: auto;
+    & h1 {
+    @include respond(phone) {
+    font-size:1.5rem;
+}
+}
 }

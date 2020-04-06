@@ -43,7 +43,7 @@
     & input[type="password"] {
         width: 100%;
         font-size:1.5rem;
-        padding: 4px;
+        padding: 6px;
         border: none;
         border-bottom: 1px solid #AAA;
         margin: 1.2rem 0;
@@ -107,7 +107,7 @@
     cursor:pointer;
 }
 
-.password_switch:hover {
+.Auth_switch:hover {
     color: $color-secondary;
     font-weight: bold;
 }
