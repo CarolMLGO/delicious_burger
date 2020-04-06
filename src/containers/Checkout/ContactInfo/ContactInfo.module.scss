@@ -1,6 +1,8 @@
+@import '../../../styles/abstracts/mixins';
+
 .ContactInfo {
 	margin: 2rem auto;
-	width: 80%;
+	width: 75%;
 	box-shadow: 0 2px 3px #ccc;
 	border: 1px solid #eee;
 	padding: 1rem;
@@ -17,8 +19,18 @@
 		font: inherit;
 		padding: 6px 10px;
 		display: block;
-		width: 100%;
+		width: 90%;
 		margin: 1.05em 0;
+        
+
+       @include respond(tab-port) {
+            margin: 0.8rem 0;
+        }
+
+        @include respond(phone) {
+            margin: 0.5rem 0;
+        }
+
 	}
 
 	& input:focus,

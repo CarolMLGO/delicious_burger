@@ -17,9 +17,9 @@ const sideDrawer = (props) => {
 				<div className={styles.Logo}>
 					<Logo />
 				</div>
-				<nav>
+				<div>
 					<NavigationItems flex="column"/>
-				</nav>
+				</div>
 			</div>
 		</Fragment>
 	)

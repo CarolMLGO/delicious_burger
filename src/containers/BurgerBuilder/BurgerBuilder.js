@@ -1,14 +1,13 @@
-import React, {Component} from 'react';
+import React, {Component,Fragment} from 'react';
+import {withRouter} from 'react-router-dom';
+import {connect} from 'react-redux';
+import * as actionCreators from '../store/actions/actionCreators';
+//import components
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
-import styles from './BurgerBuilder.module.scss';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import Spinner from '../../components/Spinner/Spinner';
-
-import {connect} from 'react-redux';
-import * as actionCreators from '../store/actions/actionCreators';
-import {withRouter} from 'react-router-dom';
 
 class BurgerBuilder extends Component {
 
@@ -25,9 +24,8 @@ class BurgerBuilder extends Component {
 
 	componentDidMount () {
 		this.props.onFetchIg();
-	}
+	};
 
-	
 	orderSummaryHandler = () => {
     	if (this.props.isAuthenticated) 
     		{
@@ -37,8 +35,6 @@ class BurgerBuilder extends Component {
     			//if not authenticated, redirect to authenticate page
     			this.props.history.push('/auth')
     	}
-
-
 	};
 
 	orderCancelHandler = () => {
@@ -68,7 +64,7 @@ class BurgerBuilder extends Component {
 		let ingredientError = this.props.igLoadingError ? <p style={{"textAlign":"center"}}> Error loading ingredients </p> : <Spinner />;
 
 		return (
-			<div className={styles.BurgerBuilder}>
+			<Fragment>
 				{
 					this.props.ingredients === null ? 
 					ingredientError
@@ -95,7 +91,7 @@ class BurgerBuilder extends Component {
 						</Modal>
 					</div>
 				}		
-			</div>
+			</Fragment>
 		)
 	}
 };

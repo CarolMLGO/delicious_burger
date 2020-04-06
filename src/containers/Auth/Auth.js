@@ -10,7 +10,8 @@ import Button from '../../components/UI/Button/Button';
 
 class Auth extends Component {
     state={
-        isSignUp: true
+        isSignUp: true,
+        passwordHidden: true
     };
 
     onSubmitHandler = (values,isSignUp) => {
@@ -20,6 +21,12 @@ class Auth extends Component {
     switchAuthHandler = () => {
         this.setState(preState=>{
             return {isSignUp: !preState.isSignUp};
+        })
+    }
+
+    toggleShowHandler = () => {
+        this.setState(preState=>{
+        return {passwordHidden: !preState.passwordHidden};
         })
     }
 
@@ -62,7 +69,10 @@ class Auth extends Component {
                             <ErrorMessage name="email">
                                 {msg=><div className={styles.error}>{msg}</div>}
                             </ErrorMessage>
-                            <Field name="password" type="text" placeholder="password"/>
+                            <div className={styles.password}>
+                                <Field name="password" type={this.state.passwordHidden?"password":"text"} placeholder="password"/>
+                                <button onClick={this.toggleShowHandler} className={styles.password_button}>{this.state.passwordHidden?'Show':'Hide'}</button>
+                            </div>
                             <ErrorMessage name="password">
                                 {msg=><div className={styles.error}>{msg}</div>}
                             </ErrorMessage>

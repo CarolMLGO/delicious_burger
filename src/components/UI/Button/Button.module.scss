@@ -14,42 +14,32 @@
     border-radius: 2px;
     text-align: center;
     &:hover {
-    	box-shadow: 0 1rem 2rem rgba($color-black, 0.15);
+    	box-shadow: $box-shadow-1;
 		transform:translateY(-2px);
     }
     &:active {
-    	box-shadow: 0 0.5rem 1rem rgba($color-black, 0.15);
+    	box-shadow: $box-shadow-1;
 		transform:translateY(0);
     }
 }
 
-// .Button:first-of-type {
-//     margin-left: 0;
-//     padding-left: 0.2rem;
-// }
-
-.Button {
-    // margin-left: 0;
-    // padding-left: 0.2rem;
-}
-
 .Button:disabled {
-    color: gray;
+    color: $color-gray-dark;
     cursor: not-allowed;
 }
 
 .Success {
-	color: $color-primary-dark;
+	color: $color-secondary;
     &:hover {
-    	background-color: $color-primary-dark;
-    	color: white;
+    	background-color: $color-secondary;
+    	color: $color-white;
     }
 }
 
 .Danger {
-    color: $color-secondary-dark;
+    color: $color-tertiary;
     &:hover {
-    	background-color: $color-secondary-dark;
+    	background-color: $color-tertiary;
     	color:white;
     }
 }

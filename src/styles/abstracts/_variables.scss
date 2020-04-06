@@ -1,15 +1,24 @@
 //COLORS
-$color-primary: #70DF95;
-$color-primary-light:#7ed56f;
-$color-primary-dark:#28b485;
-$color-primary-light-2:#a8e063;
-$color-primary-dark-2:#56ab2f;
+$color-primary: #703b09;
+$color-primary-light: #8F5C2C;
+$color-primary-light-2:#CF8F2E;
 
-$color-secondary-light:#ffb900;
-$color-secondary-dark:#ff7730;
+$color-secondary:#40A4C8;
+$color-secondary-dark:#2998ff;
 
-$color-tertiary-light:#2998ff;
-$color-tertiary-dark:#5643fa;
+$color-tertiary:#ff7730;
+
+// $color-primary: #70DF95;
+// $color-primary-light:#7ed56f;
+// $color-primary-dark:#28b485;
+// $color-primary-light-2:#a8e063;
+// $color-primary-dark-2:#56ab2f;
+
+// $color-secondary-light:#ffb900;
+// $color-secondary-dark:#ff7730;
+
+// $color-tertiary-light:#2998ff;
+// $color-tertiary-dark:#5643fa;
 
 $color-gray-light-1:#f7f7f7;
 
@@ -25,14 +34,14 @@ $color-gray:#eee;
 $default-font-size: 1.6rem;
 
 //GRID
-$grid-width: 114rem;
-$gutter-vertical: 8rem;
-$gutter-vertical-small: 6rem;
-$gutter-horizontal: 6rem;
+// $grid-width: 114rem;
+// $gutter-vertical: 8rem;
+// $gutter-vertical-small: 6rem;
+// $gutter-horizontal: 6rem;
 
 //shadow
-// $shadow-1: 0 1.5rem 4rem rgba($color-black, 0.1);
+$shadow-1: 0 1.5rem 4rem rgba($color-black, 0.1);
 $shadow-bread: inset -3px 0 #c9c9c9;
-// text-shadow: .5rem 1rem 2rem rgba($color-black,0.2);
-// box-shadow: 0 1.5rem 4rem rgba($color-black, 0.15)
-// box-shadow: 0 1.5rem 4rem rgba($color-black, .4);
+$text-shadow: .5rem 1rem 2rem rgba($color-black,0.2);
+$box-shadow-1: 0 1.5rem 4rem rgba($color-black, 0.15);
+$box-shadow-2: 0 1.5rem 4rem rgba($color-black, .4);

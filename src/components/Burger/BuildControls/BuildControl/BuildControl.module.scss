@@ -1,3 +1,5 @@
+@import '../../../../styles/abstracts/mixins';
+
 .BuildControl {
     display: flex;
     justify-content: space-between;
@@ -7,12 +9,24 @@
     & button {
         display: block;
         font: inherit;
-        padding: 0.5rem;
-        margin: 0 0.5rem;
-        width: 8rem;
+        padding: 0.5rem 1rem;
+        margin: 0.5rem 1rem;
+        width: 10rem;
         border: 1px solid #AA6817;
         cursor: pointer;
         outline: none;
+        @include respond(big-desktop) {
+            width: 12rem;
+        }
+
+       @include respond(tab-land) {
+            width: 8rem;
+        }
+        
+        @include respond(phone) {
+            margin: 0 0.5rem ;
+            width: 8rem;
+        }
 
         &:disabled {
         background-color: #AC9980;

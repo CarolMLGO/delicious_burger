@@ -1,7 +1,9 @@
+@import '../../../styles/abstracts/variables';
+@import '../../../styles/abstracts/mixins';
+
 .Toolbar {
-	height: 5.6rem;
 	width: 100%;
-	background-color: #703b09;
+	background-color: $color-primary;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -9,12 +11,15 @@
 	z-index: 90; //lower than for backdrop (100)
 }
 
-.Logo {
-	height: 80%;
-}
-
-@media (max-width: 499px) {
-	.DesktopOnly {
+.DesktopOnly{
+	// display: none;
+	@include respond(phone) {
 		display: none;
 	}
 }
+
+.Logo {
+	height: 80%;
+	margin: 1rem 0;
+}
+

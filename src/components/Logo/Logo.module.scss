@@ -1,12 +1,19 @@
+@import '../../styles/abstracts/mixins';
 .Logo{
-	height: 100%;
-	// margin-left: 2rem;
 	background-color: white;
 	padding: 0.6rem;
 	border-radius: 0.5rem;
-    text-align:center;
+    display:flex;
+    // align-self: stretch;
+    // align-items: center;
 
 	img {
-		height: 100%;
+        width: 4.5rem;
+		height:auto;
+        @include respond(big-desktop) {
+            // width: 10rem;
+        }
 	}
+
+
 }

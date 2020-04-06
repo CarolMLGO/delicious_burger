@@ -1,4 +1,5 @@
 @import '../../styles/abstracts/variables';
+@import '../../styles/abstracts/mixins';
 
 .Auth {
     display: flex;
@@ -10,26 +11,57 @@
     margin: 2rem auto;
     border-radius: 2px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-  
-    & h1 {
+
+    & .password {
+      width: 100%;
+      display: flex;
+    }
+
+    & .password_button {
+      background-color: transparent;
+      border: none;
+      border-bottom: 1px solid #AAA;
+      outline: none;
+      cursor: pointer;
+      font-size:1.5rem;
+      padding: 4px;
+      
+      margin: 1.2rem 0;
+      text-transform: uppercase;
+      transition: all 0.2s;
+      @include respond(big-desktop) {
+        margin: 1.5rem 0;
+      }
+
+      @include respond(tab-land) {
+        margin: 1rem 0;
+      }
 
     }
 
     & input[type="text"],
     & input[type="password"] {
         width: 100%;
-        display: block;
+        font-size:1.5rem;
         padding: 4px;
         border: none;
         border-bottom: 1px solid #AAA;
-        margin: 0.8rem 0;
+        margin: 1.2rem 0;
+        @include respond(big-desktop) {
+          margin: 1.5rem 0;
+        }
+
+        @include respond(tab-land) {
+          margin: 1rem 0;
+        }
     }
 
     & input[type="text"]:focus,
     & input[type="password"]:focus {
         outline: none;
-        border-bottom: 2px solid #04c8de;
-        color: #04c8de;
+        border-bottom: 2px solid $color-secondary;
+        color: $color-secondary;
+
     }
 
     & .error{
@@ -43,7 +75,7 @@
       margin-top: 2rem;
       width: 12rem;
       height: 3.2rem;
-      background: #04c8de;
+      background: $color-secondary;
       border: none;
       border-radius: 2px;
       color: #FFF;
@@ -69,13 +101,14 @@
 }
 
 .Auth_switch {
-    margin: 1rem auto;
+    margin: 0.8rem auto;
     font-size:1.5rem;
     text-align: center;
     cursor:pointer;
 }
-.Auth_switch:hover {
-    color: $color-primary-dark;
+
+.password_switch:hover {
+    color: $color-secondary;
     font-weight: bold;
 }
 

@@ -3,38 +3,30 @@
 
 .Burger {
 	width: 80%;
-	margin:auto;
-	height: 25rem;
+	margin:0 auto;
+	height: 35rem;
 	overflow: auto;
 	text-align: center;
-	font-weight: bold;
-	font-size: 1.2rem;
-	&_error {
-	/*color: $color-secondary-light;*/
-	color:red;
-	font-size: 1.6rem;
-	padding: 1rem;
-}
 
-};
-
-@media (min-width: 50rem) and (min-height: 40rem) {
-    .Burger {
-        width: 35rem;
-        height: 30rem;
-    }
-}
-
-@media (min-width: 50rem) and (min-height: 40.1rem) {
-    .Burger {
-        width: 45rem;
+    @include respond(big-desktop) {
+        // width: 70rem;
         height: 40rem;
     }
-}
 
-@media (min-width: 100rem) and (min-height: 70rem) {
-    .Burger {
-        width: 70rem;
-        height: 60rem;
+   @include respond(tab-land) {
+        height: 30rem;
     }
-}
+
+    @include respond(tab-port) {
+        height: 25rem;
+    }
+    @include respond(phone) {
+        height: 20rem;
+    }
+
+	&_error {
+    	color:red;
+    	font-size: 1.6rem;
+    	padding: 1rem;
+    }
+};

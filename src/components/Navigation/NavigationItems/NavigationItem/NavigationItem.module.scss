@@ -1,17 +1,13 @@
 .NavigationItem {
-	margin: 1rem 0;
-	display: block;
-	width: 100%;
-
 	& a {
-		// color: #8F5C2C;
 		color: white;
 		text-decoration: none;
 		width: 100%;
 		padding: 0.5rem 1rem;
 		border-bottom: 1px solid transparent;
-		display: block;
-
+		display: flex;
+		margin-top:1rem;
+		
 
 		&:hover,
 		&:active,
@@ -21,20 +17,19 @@
 	}
 };
 
-@media (min-width: 50rem) {
+@media (min-width: 600px) {
 	.NavigationItem {
 		display: flex;
 		height: 100%;
-		align-items: center;
 		width: auto;
+		
 
 		& a {
 			color: white;
-			// text-decoration: none;
 			height: 100%;
 			padding: 1.6rem 1rem;
 			border-bottom: 4px solid transparent;
-			// display: block;
+			margin-top:0;
 
 			&:hover,
 			&:active,
