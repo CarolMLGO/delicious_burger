@@ -1,4 +1,4 @@
-import React, { Component,Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Formik, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import styles from './Auth.module.scss';
@@ -9,49 +9,49 @@ import Spinner from '../../components/Spinner/Spinner';
 import Button from '../../components/UI/Button/Button';
 
 class Auth extends Component {
-    state={
-        isSignUp: true,
-        passwordHidden: true
-    };
+  state = {
+    isSignUp: true,
+    passwordHidden: true
+  };
 
-    onSubmitHandler = (values,isSignUp) => {
-        this.props.onAuth(values.email, values.password, isSignUp);
-    }
+  onSubmitHandler = (values, isSignUp) => {
+    this.props.onAuth(values.email, values.password, isSignUp);
+  }
 
-    switchAuthHandler = () => {
-        this.setState(preState=>{
-            return {isSignUp: !preState.isSignUp};
-        })
-    }
+  switchAuthHandler = () => {
+    this.setState(preState => {
+      return { isSignUp: !preState.isSignUp };
+    })
+  }
 
-    toggleShowHandler = () => {
-        this.setState(preState=>{
-        return {passwordHidden: !preState.passwordHidden};
-        })
-    }
+  toggleShowHandler = () => {
+    this.setState(preState => {
+      return { passwordHidden: !preState.passwordHidden };
+    })
+  }
 
-    componentDidUpdate() {
-        //if user is authenticated, but not add ingredients, will redirect to burger builder page
-        if(this.props.token && (!this.props.purchasable)) {
-            this.props.history.replace('/')
-        } 
-        //if user is authenticated and add ingredients to a burger, will redirect to check out page after log in
-        else if (this.props.token && this.props.purchasable) {
-            this.props.history.replace('/checkout')
-        }
+  componentDidUpdate() {
+    //if user is authenticated, but not add ingredients, will redirect to burger builder page
+    if (this.props.token && (!this.props.purchasable)) {
+      this.props.history.replace('/')
     }
-      
-    render() {
-        const validation_Yup = Yup.object({
-                    email: Yup.string()
-                        .email("Invalid email address")
-                        .required('Required'),
-                    password: Yup.string()
-                        .required('No password provided.') 
-                        .min(8, 'Password is too short - should be 8 chars minimum.up')
-                });
-        return(
-            <Fragment>
+    //if user is authenticated and add ingredients to a burger, will redirect to check out page after log in
+    else if (this.props.token && this.props.purchasable) {
+      this.props.history.replace('/checkout')
+    }
+  }
+
+  render() {
+    const validation_Yup = Yup.object({
+      email: Yup.string()
+        .email("Invalid email address")
+        .required('Required'),
+      password: Yup.string()
+        .required('No password provided.')
+        .min(8, 'Password is too short - should be 8 chars minimum')
+    });
+    return (
+      <Fragment>
             {this.props.loading 
             ?<Spinner />
             :
@@ -86,26 +86,26 @@ class Auth extends Component {
             </Formik>
             }
             </Fragment>
-        );
-    }
+    );
+  }
 }
 
 const mapStateToProps = (state) => {
-    return {
-        loading: state.auth.loading,//before we got a response from the server
-        error: state.auth.error, //display authenticaiton error message
-        token: state.auth.idToken,
-        purchasable: state.ing.purchasable //to see if the user already built a burger or not
-    }
+  return {
+    loading: state.auth.loading, //before we got a response from the server
+    error: state.auth.error, //display authenticaiton error message
+    token: state.auth.idToken,
+    purchasable: state.ing.purchasable //to see if the user already built a burger or not
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-        //send requests to server
-        onAuth: (email,password,isSignUp) => dispatch(actionCreators.auth(email,password,isSignUp))
-    }
+  return {
+    //send requests to server
+    onAuth: (email, password, isSignUp) => dispatch(actionCreators.auth(email, password, isSignUp))
+  }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Auth);
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);
 
-// <input type="submit" name="auth_submit" className={styles.Auth_submit} value={'Submit'} onClick={()=>this.onSubmitHandler(values,this.state.isSignUp)}/> 
+// <input type="submit" name="auth_submit" className={styles.Auth_submit} value={'Submit'} onClick={()=>this.onSubmitHandler(values,this.state.isSignUp)}/>

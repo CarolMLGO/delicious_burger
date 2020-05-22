@@ -67,7 +67,6 @@ export const authCheckState = () => {
         if(!token) {
             dispatch(logout())
         } else {
-
             const expirationDate = new Date(localStorage.getItem('expirationDate'));
             const userId = localStorage.getItem('userId');
             //if the expiration date is larger than the current date, it means the token is not expired, then we can dispatch success
